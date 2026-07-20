@@ -1,0 +1,1453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mei Linda Deny | Tech & Design Portfolio</title>
+    <!-- Kombinasi Font: Inter untuk bacaan, JetBrains Mono untuk kesan 'Coding/Tech' -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet" />
+
+    <style>
+        /* --- 1. Variables & Reset --- */
+        
+         :root {
+            /* Tech Dark Theme Colors */
+            --bg-main: #090e17;
+            /* Very Dark Slate */
+            --bg-secondary: #111827;
+            /* Darker Blue/Gray */
+            --bg-card: #161f33;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            /* Neon Accents */
+            --accent-cyan: #00f0ff;
+            /* Hacker Cyan */
+            --accent-purple: #a855f7;
+            /* Tech Purple */
+            --accent-pink: #ec4899;
+            --accent-green: #10b981;
+            /* Terminal Green */
+            /* Gradients */
+            --gradient-main: linear-gradient(135deg, #00f0ff 0%, #0052cc 100%);
+            --gradient-data: linear-gradient(135deg, #3b82f6 0%, #a855f7 100%);
+            --gradient-design: linear-gradient(135deg, #a855f7 0%, #ec4899 100%);
+            /* UI Elements */
+            --border-tech: 1px solid rgba(0, 240, 255, 0.2);
+            --glow-hover: 0 0 20px rgba(0, 240, 255, 0.3), inset 0 0 10px rgba(0, 240, 255, 0.1);
+            /* Typography */
+            --font-main: "Inter", sans-serif;
+            --font-code: "JetBrains Mono", monospace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+            /* Dikembalikan agar scroll navbar terasa nyaman & mulus */
+            scroll-padding-top: 100px;
+        }
+        
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            /* Latar belakang Grid ala Blueprint / UI Software */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        /* --- 2. Layout Utilities --- */
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+        /* Tombol ala Cyber/Tech */
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: var(--gradient-main);
+            color: #fff;
+            font-family: var(--font-code);
+            font-weight: 700;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background: rgba(0, 240, 255, 0.05);
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+        
+        .btn-outline:hover {
+            background: rgba(0, 240, 255, 0.15);
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+        }
+        
+        .section-title {
+            font-family: var(--font-code);
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+            text-align: center;
+        }
+        /* Tag HTML dekoratif pada judul */
+        
+        .section-title::before {
+            content: "<";
+            color: var(--accent-purple);
+            opacity: 0.7;
+        }
+        
+        .section-title::after {
+            content: " />";
+            color: var(--accent-purple);
+            opacity: 0.7;
+        }
+        
+        .section-subtitle {
+            font-family: var(--font-code);
+            color: var(--accent-cyan);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: block;
+            text-align: center;
+        }
+        /* --- 3. Navigation --- */
+        
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(9, 14, 23, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+        
+        .logo {
+            font-family: var(--font-code);
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--text-main);
+        }
+        
+        .logo span {
+            color: var(--accent-cyan);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a:focus {
+            color: var(--accent-cyan);
+        }
+        
+        .nav-links a::after {
+            content: '_';
+            position: absolute;
+            bottom: -5px;
+            right: -10px;
+            color: var(--accent-cyan);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a:focus::after {
+            opacity: 1;
+        }
+        /* --- 4. Hero Section --- */
+        
+        .hero {
+            padding: 200px 0 100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 60px;
+            min-height: 100vh;
+        }
+        
+        .hero-content {
+            flex: 1.2;
+        }
+        
+        .hero .section-subtitle {
+            text-align: left;
+        }
+        /* Animasi Blinking Cursor */
+        
+        .typewriter-text::after {
+            content: '|';
+            animation: blink 1s step-start infinite;
+            color: var(--accent-cyan);
+        }
+        
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+        
+        .hero h1 {
+            font-family: var(--font-code);
+            font-size: 3.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+        
+        .hero h1 span {
+            background: var(--gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+        
+        .hero p strong {
+            color: var(--text-main);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .hero-visual {
+            flex: 0.8;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        /* Lingkaran Glowing ala Core System */
+        
+        .hero-visual::before {
+            content: "";
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(168, 85, 247, 0.1) 50%, transparent 70%);
+            border-radius: 50%;
+            z-index: -1;
+            animation: pulse-glow 4s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+        }
+        
+        .profile-photo {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 20px;
+            border: 2px solid rgba(0, 240, 255, 0.3);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.1);
+            z-index: 2;
+            position: relative;
+        }
+        /* Efek Terminal Windows pada Floater */
+        
+        .floater-window {
+            position: absolute;
+            background: #0d1117;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 12px 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            z-index: 3;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+        }
+        
+        .floater-header {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 8px;
+        }
+        
+        .floater-header span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        
+        .dot-r {
+            background: #ff5f56;
+        }
+        
+        .dot-y {
+            background: #ffbd2e;
+        }
+        
+        .dot-g {
+            background: #27c93f;
+        }
+        
+        .code-floater {
+            bottom: -20px;
+            left: -40px;
+            color: var(--accent-purple);
+            animation: float-up-down 6s ease-in-out infinite;
+        }
+        
+        .code-floater .system-ok {
+            color: var(--accent-green);
+            margin-bottom: 5px;
+            display: block;
+        }
+        
+        .data-chart-floater {
+            top: -10px;
+            right: -30px;
+            animation: float-up-down 8s ease-in-out infinite;
+            animation-delay: 1s;
+        }
+        
+        .data-chart-floater .chart-bar {
+            height: 6px;
+            border-radius: 3px;
+            background: var(--gradient-cyan);
+            margin-top: 6px;
+        }
+        
+        .bar-1 {
+            width: 80px;
+            background: var(--accent-cyan);
+        }
+        
+        .bar-2 {
+            width: 120px;
+            background: var(--accent-purple);
+        }
+        
+        .bar-3 {
+            width: 50px;
+            background: var(--accent-pink);
+        }
+        
+        @keyframes float-up-down {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+        /* --- 5. About / Terminal Info Cards --- */
+        
+        .about-section {
+            padding: 80px 0;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            /* Diperlukan untuk trik HTML autofocus */
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        /* Desain Terminal Window */
+        
+        .info-card {
+            background: var(--bg-main);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .info-card:hover {
+            border-color: rgba(0, 240, 255, 0.4);
+            box-shadow: var(--glow-hover);
+            transform: translateY(-5px);
+        }
+        
+        .terminal-header {
+            background: #1e293b;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .terminal-title {
+            margin-left: auto;
+            margin-right: auto;
+            font-family: var(--font-code);
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        .terminal-body {
+            padding: 30px;
+        }
+        
+        .terminal-body h3 {
+            font-family: var(--font-code);
+            font-size: 1.2rem;
+            color: var(--accent-cyan);
+            margin-bottom: 24px;
+        }
+        
+        .info-item {
+            margin-bottom: 20px;
+            border-left: 2px solid rgba(0, 240, 255, 0.3);
+            padding-left: 15px;
+        }
+        
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .info-item strong {
+            display: block;
+            color: var(--text-main);
+            font-size: 1.05rem;
+        }
+        
+        .info-item p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            font-family: var(--font-code);
+        }
+        
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .skill-tags span {
+            background: rgba(0, 240, 255, 0.05);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+            padding: 6px 14px;
+            border-radius: 4px;
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tags span.purple {
+            color: #d8b4fe;
+            border-color: rgba(168, 85, 247, 0.3);
+            background: rgba(168, 85, 247, 0.05);
+        }
+        
+        .skill-tags span:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+        
+        .skill-tags span.purple:hover {
+            background: var(--accent-purple);
+            color: #fff;
+            box-shadow: 0 0 10px var(--accent-purple);
+        }
+        /* --- 6. Tech Stack Strip (Log Marquee) --- */
+        
+        .tech-stack {
+            padding: 20px 0;
+            background: #000;
+            border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .scrolling-track {
+            display: flex;
+            gap: 40px;
+            width: max-content;
+            animation: scroll-code 20s linear infinite;
+        }
+        
+        .tech-item {
+            font-family: var(--font-code);
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.3);
+            white-space: nowrap;
+        }
+        
+        .tech-item span {
+            color: var(--accent-green);
+        }
+        
+        @keyframes scroll-code {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        /* --- 7. Projects Section --- */
+        
+        .projects {
+            padding: 100px 0 50px;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        /* Garis atas dekoratif ala Tech Card */
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-cyan);
+            z-index: 10;
+        }
+        
+        .design-card::before {
+            background: var(--accent-pink);
+        }
+        
+        .data-card::before {
+            background: var(--accent-purple);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(0, 240, 255, 0.3);
+            box-shadow: var(--glow-hover);
+        }
+        
+        .design-card:hover {
+            border-color: rgba(236, 72, 153, 0.3);
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+        }
+        
+        .data-card:hover {
+            border-color: rgba(168, 85, 247, 0.3);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+        }
+        
+        .card-image {
+            height: 220px;
+            background: #000;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .lightbox-trigger {
+            display: block;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        /* Overlay Indikator Klik CSS */
+        
+        .card-image::after {
+            content: '[ KLIK_UNTUK_ZOOM ]';
+            font-family: var(--font-code);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 14, 23, 0.8);
+            color: var(--accent-cyan);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+        
+        .design-card .card-image::after {
+            color: var(--accent-pink);
+        }
+        
+        .data-card .card-image::after {
+            color: var(--accent-purple);
+        }
+        
+        .card-image:hover::after {
+            opacity: 1;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0.8;
+            /* Slightly dim in dark mode */
+        }
+        
+        .project-card:hover .card-image img {
+            transform: scale(1.05);
+            opacity: 1;
+            filter: contrast(1.1);
+        }
+        
+        .card-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        
+        .card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .tag {
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-family: var(--font-code);
+            font-weight: 700;
+            background: rgba(0, 240, 255, 0.1);
+            color: var(--accent-cyan);
+            border: 1px solid rgba(0, 240, 255, 0.2);
+        }
+        
+        .tag.data-tag {
+            background: rgba(168, 85, 247, 0.1);
+            color: #d8b4fe;
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+        
+        .tag.design-tag {
+            background: rgba(236, 72, 153, 0.1);
+            color: #f9a8d4;
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+        
+        .card-content h3 {
+            margin-bottom: 10px;
+            font-size: 1.25rem;
+            color: var(--text-main);
+        }
+        
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+        
+        .link-arrow {
+            font-family: var(--font-code);
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-top: auto;
+            text-transform: uppercase;
+        }
+        
+        .link-arrow:hover {
+            text-shadow: 0 0 8px var(--accent-cyan);
+            letter-spacing: 1px;
+        }
+        
+        .btn-project-drive {
+            margin-top: auto;
+            padding: 10px 0;
+            font-family: var(--font-code);
+            font-size: 0.85rem;
+            border-radius: 4px;
+            background: transparent;
+            border: 1px solid var(--accent-pink);
+            color: var(--accent-pink);
+            text-align: center;
+            text-transform: uppercase;
+        }
+        
+        .data-btn {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+        
+        .btn-project-drive:hover {
+            background: rgba(236, 72, 153, 0.1);
+            box-shadow: 0 0 15px rgba(236, 72, 153, 0.3);
+        }
+        
+        .data-btn:hover {
+            background: rgba(168, 85, 247, 0.1);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.3);
+        }
+        /* --- 8. Certificates & Footer --- */
+        
+        .certificates {
+            padding: 100px 0;
+            background-color: var(--bg-secondary);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        footer {
+            background: #05080f;
+            padding: 100px 0 40px;
+            text-align: center;
+            border-top: 1px solid rgba(0, 240, 255, 0.2);
+            position: relative;
+        }
+        /* Grid footer */
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(0, 240, 255, 0.05));
+            pointer-events: none;
+        }
+        
+        .footer-content {
+            max-width: 650px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        footer h2 {
+            font-family: var(--font-code);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        footer p {
+            color: var(--text-muted);
+            margin-bottom: 40px;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-links a {
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+            text-shadow: 0 0 5px var(--accent-cyan);
+        }
+        
+        .copyright {
+            font-family: var(--font-code);
+            font-size: 0.8rem;
+            color: #475569;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
+        }
+        /* --- 9. CSS-Only Lightbox (Checkbox Hack) --- */
+        
+        .lightbox-toggle {
+            display: none;
+        }
+        
+        .lightbox-toggle:checked+.css-lightbox {
+            display: flex;
+        }
+        
+        .css-lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(5, 8, 15, 0.95);
+            /* Sangat gelap */
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .css-lightbox-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: crosshair;
+        }
+        
+        .css-lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+            border: 1px solid var(--accent-cyan);
+            box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+            object-fit: contain;
+            position: relative;
+            z-index: 10000;
+            animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .css-close-btn {
+            position: absolute;
+            top: 20px;
+            right: 40px;
+            color: var(--accent-cyan);
+            font-family: var(--font-code);
+            font-size: 35px;
+            cursor: pointer;
+            z-index: 10001;
+        }
+        
+        .css-close-btn:hover {
+            text-shadow: 0 0 10px var(--accent-cyan);
+        }
+        /* --- 10. Responsive Design --- */
+        
+        @media (max-width: 1024px) {
+            .project-grid,
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                padding: 140px 0 60px;
+                gap: 40px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-visual {
+                width: 100%;
+            }
+            .profile-photo {
+                width: 240px;
+                height: 240px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .project-grid,
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .code-floater,
+            .data-chart-floater {
+                display: none;
+                /* Hide on mobile to save space */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">PORTFOLIO<span>_</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Projets</a></li>
+                <li><a href="#design-projects">Design</a></li>
+                <li><a href="#certificates">Cert</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container hero" id="home">
+        <div class="hero-content">
+            <span class="section-subtitle typewriter-text">System.out.println("Hello World");</span>
+            <h1><span>Mei Linda Deny</span><br>Turning Data & Code Into Experiences</h1>
+            <p>
+                Hello, I'm Mei Linda Deny, an Information Systems graduate with a passion for design, technology, and creativity. I enjoy turning ideas into meaningful digital experiences through graphic design, branding, web design, web development, and data-driven
+                solutions. I believe great design is about more than aesthetics it's about solving problems, communicating ideas, and creating value that leaves a lasting impact.
+            </p>
+        </div>
+
+        <div class="hero-visual">
+            <div class="floater-window data-chart-floater">
+                <div class="floater-header">
+                    <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+                </div>
+                <div style="color:var(--text-muted)">> metric_analysis.py</div>
+                <div class="chart-bar bar-1"></div>
+                <div class="chart-bar bar-2"></div>
+                <div class="chart-bar bar-3"></div>
+            </div>
+
+            <!-- LINK GAMBAR HERO MENUJU LIGHTBOX -->
+            <label for="zoom-profil" style="cursor: pointer; position: relative; z-index: 2;">
+                <img src="assets/images/profil.jpg" alt="Mei Linda Deny" class="profile-photo" />
+            </label>
+
+            <div class="floater-window code-floater">
+                <div class="floater-header">
+                    <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+                </div>
+                <span class="system-ok">[OK] System Initialize</span>
+                <span>> df.dropna().groupby('UI')</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAGIAN PROFIL / ABOUT -->
+    <section class="about-section" id="about">
+        <!-- TRIK HTML MURNI: Buka web otomatis meluncur cantik ke profil. -->
+        <input type="text" autofocus style="position: absolute; top: -100px; left: 0; opacity: 0; pointer-events: none;" aria-hidden="true" tabindex="-1">
+
+        <div class="container">
+            <span class="section-subtitle">System.info()</span>
+            <h2 class="section-title">About_Me</h2>
+
+            <div class="info-grid">
+                <!-- Terminal Card 1 -->
+                <div class="info-card">
+                    <div class="terminal-header">
+                        <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+                        <span class="terminal-title">education.log</span>
+                    </div>
+                    <div class="terminal-body">
+                        <h3>🎓 Education</h3>
+                        <div class="info-item">
+                            <strong>SMK Bhakti Praja Talang</strong>
+                            <p>Computer & Network Eng. (2019 - 2022)</p>
+                        </div>
+                        <div class="info-item">
+                            <strong>Universitas Kristen Duta Wacana</strong>
+                            <p>B.S. Information Systems (2022 - 2026)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal Card 2 -->
+                <div class="info-card">
+                    <div class="terminal-header">
+                        <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+                        <span class="terminal-title">skills.json</span>
+                    </div>
+                    <div class="terminal-body">
+                        <h3>💡 Analytics & Design</h3>
+                        <div class="skill-tags">
+                            <span>Data_Visualization</span>
+                            <span>Statistical_Analysis</span>
+                            <span>UI/UX_Design</span>
+                            <span>User_Research</span>
+                            <span>Graphic_Design</span>
+                            <span>Videography</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal Card 3 -->
+                <div class="info-card">
+                    <div class="terminal-header">
+                        <span class="dot-r"></span><span class="dot-y"></span><span class="dot-g"></span>
+                        <span class="terminal-title">tools.config</span>
+                    </div>
+                    <div class="terminal-body">
+                        <h3>🛠 Tech Stack Tools</h3>
+                        <div class="skill-tags">
+                            <span class="purple">Python</span>
+                            <span class="purple">HTML</span>
+                            <span class="purple">CSS</span>
+                            <span class="purple">Java Script</span>
+                            <span class="purple">Excel</span>
+                            <span>Figma</span>
+                            <span>Lightroom</span>
+                            <span>Canva</span>
+                            <span>CapCut</span>
+                            <span>Corel_Draw</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tech-stack">
+        <div class="scrolling-track">
+            <div class="tech-item"><span>></span> Desain Website</div>
+            <div class="tech-item"><span>></span> Exporting Figma Assets</div>
+            <div class="tech-item"><span>></span> Fetching Data Analytics</div>
+            <div class="tech-item"><span>></span> Initializing User Research</div>
+            <div class="tech-item"><span>></span> Graphic Design</div>
+        </div>
+    </section>
+
+    <!-- SECTION ORIGINAL: UI/UX PROJECTS -->
+    <section class="container projects" id="work">
+        <span class="section-subtitle">dir /Design Website/</span>
+        <h2 class="section-title">Projects</h2>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div class="card-image">
+                    <label for="zoom-ui2" class="lightbox-trigger">
+                        <img src="assets/images/Utama.png" alt="Website FTI UKDW">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag">Website</span><span class="tag">UI Design</span></div>
+                    <h3>FTI UKDW Web Portal</h3>
+                    <p>Perancangan ulang website Fakultas Teknologi Informasi UKDW demi navigasi yang lebih intuitif.</p>
+                    <a href="https://www.figma.com/proto/zYu6gYaxcJsWBY6x9bg2bB/FTI-UKDW?node-id=1-2&p=f&t=agvwTYKgG03ehyex-0&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A2" target="_blank" class="link-arrow">Execute Detail ></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image">
+                    <label for="zoom-ui3" class="lightbox-trigger">
+                        <img src="assets/images/goldendragon.png" alt="LensArt Studio">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag">Website</span></div>
+                    <h3>Golden Dragon Restaurant</h3>
+                    <p>Website pemeasanan makanan restoran chinese food golden dragon.</p>
+                    <a href="https://meilindadeny-max.github.io/restoran-golden-dragon/" target="_blank" class="link-arrow">Execute Detail ></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image">
+                    <label for="zoom-ui4" class="lightbox-trigger">
+                        <img src="assets/images/undangan.png" alt="Admin Dashboard">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag">Website</span></div>
+                    <h3>Undangan Pernikahan</h3>
+                    <p>Website Undangan Pernikahan.</p>
+                    <a href="https://meilindadeny-max.github.io/undangan-pernikahan/" target="_blank" class="link-arrow">Execute Detail ></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image">
+                    <label for="zoom-ui5" class="lightbox-trigger">
+                        <img src="assets/images/resto.png" alt="Startup Landing Page">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag">Website</span></div>
+                    <h3>Website</h3>
+                    <p>Website promosi restoran chinese food golden dragon</p>
+                    <a href="https://meilindadeny-max.github.io/promosi-restoran/" target="_blank" class="link-arrow">Execute Detail ></a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="card-image">
+                    <label for="zoom-ui6" class="lightbox-trigger">
+                        <img src="assets/images/taro.png" alt="Marketplace Design">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag">Website</span></div>
+                    <h3>Taro Foundation</h3>
+                    <p>Jasa pembuatan frontend website Taro Foundation.</p>
+                    <a href="https://tarodigitalstudio.com" target="_blank" class="link-arrow">Execute Detail ></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION BARU: PORTFOLIO DESAIN (GRAPHIC DESIGN) -->
+    <section class="container projects" id="design-projects">
+        <span class="section-subtitle" style="color:var(--accent-pink);">dir /graphic_design/</span>
+        <h2 class="section-title">Design</h2>
+
+        <div class="project-grid">
+            <div class="project-card design-card">
+                <div class="card-image">
+                    <label for="zoom-des1" class="lightbox-trigger">
+                        <img src="assets/images/buruh.jpeg" alt="Konten IMT">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag design-tag">Feed</span></div>
+                    <h3>Desain Feed Ukkb IMT UKDW</h3>
+                    <p>Desain feed organisasi ukkb IMT UKDW.</p>
+                    <a href="https://drive.google.com/drive/folders/12nKlellKJI2flv7tl1ddRsDw0_XgJDvZ?usp=sharing" target="_blank" class="btn-project-drive">View File ></a>
+                </div>
+            </div>
+
+            <div class="project-card design-card">
+                <div class="card-image">
+                    <label for="zoom-des2" class="lightbox-trigger">
+                        <img src="assets/images/feed.png" alt="Konten KKN">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag design-tag">Feed</span></div>
+                    <h3>Desain Konten KKN</h3>
+                    <p>Desain Konten KKN</p>
+                    <a href="https://www.instagram.com/kknr52.ukdw?igsh=a3RtZ2VsZ3pxOXBv" target="_blank" class="btn-project-drive">View File ></a>
+                </div>
+            </div>
+
+            <div class="project-card design-card">
+                <div class="card-image">
+                    <label for="zoom-des3" class="lightbox-trigger">
+                        <img src="assets/images/TG.jpg" alt="Konten Instagram Komunitas Gereja">
+                    </label>
+                </div>
+                <div class="card-content">
+                    <div class="card-tags"><span class="tag design-tag">Konten Instagram</span></div>
+                    <h3>Editor Truegeneration</h3>
+                    <p>Editor akun instagram komunitas rohani gereja</p>
+                    <a href="https://www.instagram.com/coach.truegeneration?igsh=MWgxc3M4b2J3ZXc1dg==" target="_blank" class="btn-project-drive">View File ></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BAGIAN SERTIFIKAT YANG SUDAH DIPISAH -->
+    <section class="certificates" id="certificates">
+        <div class="container">
+
+            <!-- SUB-SECTION: SERTIFIKAT MAGANG (2 Items) -->
+            <span class="section-subtitle">dir /achievements/internship/</span>
+            <h2 class="section-title">Internship Certificate</h2>
+
+            <div class="project-grid" style="margin-bottom: 80px;">
+                <!-- Magang 1 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-magang1" class="lightbox-trigger">
+                            <img src="assets/images/bethesda.jpg" alt="Sertifikat Magang Bethesda" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">Sertifikat Magang</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Fullstack Dev - RS Bethesda Yogyakarta</p>
+                    </div>
+                </div>
+
+                <!-- Magang 2 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-magang2" class="lightbox-trigger">
+                            <img src="assets/images/vinix.png" alt="Sertifikat Magang 2" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">Sertifikat Magang</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Data Sains - Vinix7</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SUB-SECTION: SERTIFIKAT ORGANISASI (5 Items) -->
+            <span class="section-subtitle">dir /achievements/organization/</span>
+            <h2 class="section-title">Organization Certificate</h2>
+
+            <div class="project-grid">
+                <!-- Organisasi 1 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-org1" class="lightbox-trigger">
+                            <img src="assets/images/bem.jpg" alt="KaDept Sosial BEM FTI" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">KaDept Sosial Mahasiswa</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">BEM FTI UKDW</p>
+                    </div>
+                </div>
+
+                <!-- Organisasi 2 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-org2" class="lightbox-trigger">
+                            <img src="assets/images/FtiCamp.png" alt="Ketua FTI Camp" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">Ketua FTI Camp</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Program Kerja BEM FTI</p>
+                    </div>
+                </div>
+
+                <!-- Organisasi 3 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-org3" class="lightbox-trigger">
+                            <img src="assets/images/Dwisaf.jpg" alt="Sertifikat Organisasi 3" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">Anggota Humas</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Dwisaf</p>
+                    </div>
+                </div>
+
+                <!-- Organisasi 4 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-org4" class="lightbox-trigger">
+                            <img src="assets/images/ise.png" alt="Sertifikat Organisasi 4" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">SC</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Information System Expo</p>
+                    </div>
+                </div>
+
+                <!-- Organisasi 5 -->
+                <div class="project-card">
+                    <div class="card-image">
+                        <label for="zoom-org5" class="lightbox-trigger">
+                            <img src="assets/images/pasneka.jpg" alt="Sertifikat Organisasi 5" />
+                        </label>
+                    </div>
+                    <div class="card-content">
+                        <h3 style="margin-bottom:0">Anggota Humas</h3>
+                        <p style="margin-top:5px; font-family:var(--font-code); font-size:0.8rem;">Pasar Kebhinekaan</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container footer-content">
+            <span class="section-subtitle">System.exit(0)</span>
+            <h2>Initialize Collaboration?</h2>
+            <p>Butuh desain yang intuitif dan menarik?</p>
+
+            <div class="footer-links">
+                <!-- HTML MURNI UPDATE: Diberi Subject dan Body otomatis -->
+                <a href="mailto:meilindadeny@gmail.com?subject=Tawaran%20Kerja%20Sama&body=Halo%20Mei%20Linda,%0A%0ASaya%20telah%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berkolaborasi.%0A%0ATerima%20kasih.">
+                [ Email ]
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/mlnda_dny" target="_blank" rel="noopener noreferrer">
+                [ Instagram ]
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6285865006269?text=Halo%20Mei%20Linda,%20saya%20tertarik%20dengan%20portofolio%20Anda." target="_blank" rel="noopener noreferrer">
+                [ WhatsApp ]
+                </a>
+            </div>
+
+            <div class="copyright">
+                © 2026 Compiled by Mei Linda Deny. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CSS-ONLY LIGHTBOX MODALS (CHECKBOX HACK) -->
+
+    <!-- Profil -->
+    <input type="checkbox" id="zoom-profil" class="lightbox-toggle">
+    <div class="css-lightbox">
+        <label for="zoom-profil" class="css-lightbox-overlay"></label>
+        <label for="zoom-profil" class="css-close-btn">&times;</label>
+        <img src="assets/images/profil.jpg" alt="Mei Linda Deny" class="css-lightbox-content">
+    </div>
+
+    <!-- Projects -->
+    <input type="checkbox" id="zoom-ui2" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-ui2" class="css-lightbox-overlay"></label><label for="zoom-ui2" class="css-close-btn">&times;</label><img src="assets/images/Utama.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-ui3" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-ui3" class="css-lightbox-overlay"></label><label for="zoom-ui3" class="css-close-btn">&times;</label><img src="assets/images/goldendragon.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-ui4" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-ui4" class="css-lightbox-overlay"></label><label for="zoom-ui4" class="css-close-btn">&times;</label><img src="assets/images/undangan.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-ui5" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-ui5" class="css-lightbox-overlay"></label><label for="zoom-ui5" class="css-close-btn">&times;</label><img src="assets/images/resto.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-ui6" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-ui6" class="css-lightbox-overlay"></label><label for="zoom-ui6" class="css-close-btn">&times;</label><img src="assets/images/taro.png" class="css-lightbox-content"></div>
+
+    <!-- Design Projects -->
+    <input type="checkbox" id="zoom-des1" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-des1" class="css-lightbox-overlay"></label><label for="zoom-des1" class="css-close-btn">&times;</label><img src="assets/images/buruh.jpeg" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-des2" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-des2" class="css-lightbox-overlay"></label><label for="zoom-des2" class="css-close-btn">&times;</label><img src="assets/images/feed.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-des3" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-des3" class="css-lightbox-overlay"></label><label for="zoom-des3" class="css-close-btn">&times;</label><img src="assets/images/TG.jpg" class="css-lightbox-content"></div>
+
+    <!-- Certificates Lightbox Updates -->
+
+    <!-- Magang -->
+    <input type="checkbox" id="zoom-magang1" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-magang1" class="css-lightbox-overlay"></label><label for="zoom-magang1" class="css-close-btn">&times;</label><img src="assets/images/bethesda.jpg" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-magang2" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-magang2" class="css-lightbox-overlay"></label><label for="zoom-magang2" class="css-close-btn">&times;</label><img src="assets/images/vinix.png" class="css-lightbox-content"></div>
+
+    <!-- Organisasi -->
+    <input type="checkbox" id="zoom-org1" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-org1" class="css-lightbox-overlay"></label><label for="zoom-org1" class="css-close-btn">&times;</label><img src="assets/images/bem.jpg" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-org2" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-org2" class="css-lightbox-overlay"></label><label for="zoom-org2" class="css-close-btn">&times;</label><img src="assets/images/FtiCamp.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-org3" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-org3" class="css-lightbox-overlay"></label><label for="zoom-org3" class="css-close-btn">&times;</label><img src="assets/images/Dwisaf.jpg" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-org4" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-org4" class="css-lightbox-overlay"></label><label for="zoom-org4" class="css-close-btn">&times;</label><img src="assets/images/ise.png" class="css-lightbox-content"></div>
+
+    <input type="checkbox" id="zoom-org5" class="lightbox-toggle">
+    <div class="css-lightbox"><label for="zoom-org5" class="css-lightbox-overlay"></label><label for="zoom-org5" class="css-close-btn">&times;</label><img src="assets/images/pasneka.jpg" class="css-lightbox-content"></div>
+
+</body>
+
+</html>
